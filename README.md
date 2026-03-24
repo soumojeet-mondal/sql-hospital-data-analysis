@@ -41,50 +41,103 @@ The dataset contains hospital-related information including:
 
 ---
 
-# 📊 SQL Analysis Performed
+# 📊 Advanced SQL Analysis
 
-The project contains multiple analytical queries including:
+This project focuses on performing **analytical SQL queries** to extract meaningful insights from hospital operational data.
 
-### Patient Analysis
+Some key analytical tasks include:
 
-* Total number of patients across hospitals
-* Total patients treated per city
-* Department with lowest patient count
+### Hospital Performance Analysis
 
-### Hospital Performance
-
-* Average doctors per hospital
-* Top departments with highest patients
+* Identifying the **top 3 departments treating the highest number of patients**
+* Determining the **hospital with the maximum medical expenses**
 
 ### Financial Analysis
 
-* Hospital with highest medical expenses
-* Monthly medical expense report
-* Daily average medical expense per hospital
+* Generating a **monthly medical expense report**
+* Calculating the **daily average medical expense per hospital**
 
 ### Patient Stay Analysis
 
-* Longest hospital stay
-* Average stay duration per department
+* Finding the **longest hospital stay** using date difference calculations
+* Computing the **average length of stay for each department**
 
 These queries demonstrate the use of:
 
 * Aggregate Functions (`SUM`, `AVG`)
 * `GROUP BY`
 * `ORDER BY`
-* Date calculations
-* Data filtering and ranking
+* Date arithmetic
+* Ranking and filtering using `LIMIT`
+
+📂 **View the complete SQL queries here:**
+[`sql/hospital_queries.sql`](sql/hospital_queries.sql)
 
 ---
 
-# 📁 Project Files
+# 🔍 Example SQL Queries
 
-| File                      | Description                     |
-| ------------------------- | ------------------------------- |
-| dataset/hospital_data.csv | Dataset used for analysis       |
-| sql/hospital_queries.sql  | SQL queries used in the project |
-| project_report            | Project documentation           |
-| screenshots               | Query output results            |
+Below are some of the analytical queries used in this project.
+
+### 1️⃣ Longest Hospital Stay
+
+This query identifies the hospital record with the **longest patient stay**.
+
+```sql
+SELECT hospital_name,
+       discharge_date - admission_date AS longest_stay
+FROM hospital
+ORDER BY longest_stay DESC
+LIMIT 1;
+```
+
+---
+
+### 2️⃣ Monthly Medical Expense Report
+
+This query analyzes **hospital expenses over time** by grouping data by month.
+
+```sql
+SELECT EXTRACT(MONTH FROM admission_date) AS month,
+       SUM(medical_expenses) AS monthly_expense
+FROM hospital
+GROUP BY month
+ORDER BY month;
+```
+
+---
+
+### 3️⃣ Top Departments by Patient Load
+
+This query identifies the **top 3 departments handling the most patients**.
+
+```sql
+SELECT department,
+       SUM(patients_count) AS total_patients
+FROM hospital
+GROUP BY department
+ORDER BY total_patients DESC
+LIMIT 3;
+```
+
+---
+
+# 📁 Project Structure
+
+```
+sql-hospital-data-analysis
+│
+├── dataset
+│   └── Hospital_Data.csv
+│
+├── sql
+│   └── hospital_queries.sql
+│
+├── project_report
+│   └── sql_project_report.pdf
+│
+└── README.md
+```
 
 ---
 
@@ -99,13 +152,12 @@ These queries demonstrate the use of:
 
 # 📊 Sample Insights
 
-Some insights obtained from the analysis:
+Some insights obtained from the analysis include:
 
-* Hospitals with the highest medical expenses
-* Departments with the largest patient load
-* Cities treating the most patients
-* Average patient stay duration
-* Monthly hospital expense trends
+* Hospitals with the **highest medical expenses**
+* Departments handling the **largest patient load**
+* **Monthly trends** in hospital medical expenses
+* Patient stay **duration patterns across departments**
 
 ---
 
@@ -115,7 +167,8 @@ This project was completed as part of a **SQL practice project to strengthen dat
 
 ---
 
-# 👤
-**Soumojeet Mondal**
+# 👤 Author
+
+**Soumojeet**
 
 If you find this project helpful, feel free to ⭐ the repository.
