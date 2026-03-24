@@ -115,8 +115,7 @@ This project was completed as part of a **SQL practice project to strengthen dat
 
 ---
 
-# 👤 Author
-
-**Soumo Jeet**
+# 👤
+**Soumojeet Mondal**
 
 If you find this project helpful, feel free to ⭐ the repository.
